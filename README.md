@@ -11,3 +11,12 @@ Quick start
 ```
 ./scripts/install.sh
 ```
+
+Add sstuff
+* https://cstan.io/?p=13282&lang=en
+* https://github.com/coderofsalvation/podi
+* https://github.com/redhat-cop/gitops-catalog
+  
+Links
+------
+* [GitOps](https://github.com/cablelabs/gitops)
