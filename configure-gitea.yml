@@ -1,0 +1,59 @@
+- name: Deploy Gitea
+  hosts: localhost
+  become: true
+  vars:
+    gitea_user: svc-gitea
+    gitea_admin: admin 
+    gitea_password: genreated
+
+  tasks:
+    - name: Enable linger
+      command: loginctl enable-linger "{{ gitea_user }}"
+      changed_when: false
+
+    - name: Create Gitea data directory
+      file:
+        path: "/home/{{ gitea_user }}/gitea"
+        state: directory
+        owner: "{{ gitea_user }}"
+        group: "{{ gitea_user }}"
+        mode: '0755'
+      become: false
+
+    - name: Setting permissions on data folder
+      ansible.builtin.command:  setfacl -m u:26:-wx /home/{{ gitea_user }}/gitea
+
+    - name: Start Gitea
+      containers.podman.podman_container:
+        name: gitea
+        image: gitea/gitea:1.16.9
+        volume:
+          - "/home/{{ gitea_user }}/gitea:/data:Z"
+        ports:
+          - "3000:3000"
+          - "10022:22"
+        env:
+          APP_NAME: "Openshift Virtualization Gitea" 
+          GITEA__DEFAULT__RUN_MODE: prod
+          GITEA__server__DOMAIN: "{{ ansible_fqdn }}"
+          GITEA__server__SSH_DOMAIN: "{{ ansible_fqdn }}"
+          GITEA__server__ROOT_URL: "http://{{ ansible_fqdn }}:3000"
+          GITEA__server__OFFLINE_MODE: true
+          GITEA__database__PATH: /data/gitea/gitea.db
+          GITEA__database__DB_TYPE: sqlite3
+          GITEA__picture__DISABLE_GRAVATAR: true
+          GITEA__service__DISABLE_REGISTRATION: true
+          GITEA__service__REQUIRE_SIGNIN_VIEW: true
+          GITEA__security__INSTALL_LOCK: true
+      become: false
+
+    - name: Create Gitea admin user
+      command: "podman exec -u git gitea /usr/local/bin/gitea admin user create --admin --username {{ gitea_admin }} --password {{ gitea_password }} --email root@localhost"
+      register: create_user
+      changed_when:
+        - create_user.rc != 1
+        - '"already exists" not in create_user.stdout'
+      failed_when:
+        - create_user.rc != 0
+        - '"already exists" not in create_user.stdout'
+      become: false

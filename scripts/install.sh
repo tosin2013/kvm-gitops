@@ -24,3 +24,7 @@ git clone https://github.com/tosin2013/openshift-virtualization-gitops.git
 cd openshift-virtualization-gitops
 ansible-galaxy install --force -r roles/requirements.yml
 ansible-galaxy collection install --force -r collections/requirements.yml
+
+useradd svc-gitea
+export GITEA_PASSWORD=$(openssl rand -base64 12) | tee /home/svc-gitea/gitea-password.txt
+ansible-playbook -i  inventories/production/hosts configure-gitea.yml --extra-vars "gitea_admin=svc-gitea gitea_password=${GITEA_PASSWORD}"
