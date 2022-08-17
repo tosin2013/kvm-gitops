@@ -5,6 +5,7 @@
     gitea_user: svc-gitea
     gitea_admin: admin 
     gitea_password: genreated
+    endpoint: 127.0.0.1
 
   tasks:
     - name: Enable linger
@@ -35,9 +36,9 @@
         env:
           APP_NAME: "Openshift Virtualization Gitea" 
           GITEA__DEFAULT__RUN_MODE: prod
-          GITEA__server__DOMAIN: "{{ ansible_fqdn }}"
-          GITEA__server__SSH_DOMAIN: "{{ ansible_fqdn }}"
-          GITEA__server__ROOT_URL: "http://{{ ansible_fqdn }}:3000"
+          GITEA__server__DOMAIN: "{{ endpoint}}"
+          GITEA__server__SSH_DOMAIN: "{{ endpoint}}"
+          GITEA__server__ROOT_URL: "http://{{ endpoint}}:3000"
           GITEA__server__OFFLINE_MODE: true
           GITEA__database__PATH: /data/gitea/gitea.db
           GITEA__database__DB_TYPE: sqlite3
