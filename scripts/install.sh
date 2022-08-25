@@ -15,6 +15,7 @@ chmod +x configure-openshift-packages.sh
 rm configure-openshift-packages.sh
 
 pip3 install jmespath
+pip3 install j2cli
 
 git clone https://github.com/tosin2013/openshift-4-deployment-notes.git
 git clone https://github.com/tosin2013/openshift-virtualization-gitops.git
