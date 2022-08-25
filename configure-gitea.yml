@@ -58,3 +58,168 @@
         - create_user.rc != 0
         - '"already exists" not in create_user.stdout'
       become: false
+
+    - name: Creating a file with content
+      copy:
+        dest: "/tmp/file.json"
+        content: |
+          {"name":"test"}
+
+    - name: Pause for 60 seconds for Gitea to be ready
+      ansible.builtin.pause:
+        seconds: 60
+
+    - name: Get API Key
+      uri:
+        headers:
+          Content-Type: application/json
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/users/svc-gitea/tokens"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/file.json
+      register: gitea_api_key
+
+    - name: Debug API Key
+      ansible.builtin.debug:
+          msg: "{{  gitea_api_key |community.general.json_query('*.sha1') }}"
+
+    - name: Set the API Key fact
+      ansible.builtin.set_fact:
+        api_key: "{{ gitea_api_key |community.general.json_query('*.sha1') }}"
+
+    - name: Get API Key
+      ansible.builtin.debug:
+        var: api_key
+
+    - name: Creating empty repo
+      copy:
+        dest: "/tmp/file-repo.json"
+        content: |
+          {"name": "openshift-virtualization-gitops"}
+
+    - name: Empty Repository
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/user/repos"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/file-repo.json
+      register: gitea_api_key
+
+    - name: Migrate Repository
+      copy:
+        dest: "/tmp/file-repo-migration.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/redhat-cop/gitops-catalog",
+            "repo_name": "gitops-catalog",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/gitops-catalog.git",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+
+    - name: Migrate Red Hat GitOps Repository
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/file-repo-migration.json
+      register: gitea_api_key
+
+    - name: Migrate Repository OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      copy:
+        dest: "/tmp/rhacm-configuration.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/Red-Hat-SE-RTO/rhacm-configuration",
+            "repo_name": "rhacm-configuration",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/rhacm-configuration.git",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+
+    - name: Migrate OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/rhacm-configuration.json
+      register: gitea_api_key
+
+
+    - name: Migrate Repository OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      copy:
+        dest: "/tmp/applications.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/Red-Hat-SE-RTO/applications",
+            "repo_name": "applications",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/applications.git",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+
+    - name: Migrate OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/applications.json
+      register: gitea_api_key
