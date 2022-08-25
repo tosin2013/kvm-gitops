@@ -44,7 +44,7 @@ vim ~/ocp-pull-secret
 
 ./bootstrap-post-install.sh
 ```
-## 2. Confiure ODF 
+## 2. Configure ODF 
 
 ### Option 1: Internal OpenShit ODF instance
 
