@@ -1,4 +1,4 @@
-OpenShift Virtualization GitOPs Repository
+OpenShift Virtualization GitOps Repository
 ------------------------------------------
 This repository is used to manage the OpenShift Virtualization GitOps Deployments in a Gitops Manner. 
 
@@ -11,6 +11,13 @@ Quick start
 ```
 ./scripts/install.sh
 ```
+
+## Using UI
+python3 setup.py 
+go to http://localhost:8081/ or http://ipaddress:8081/ui/
+
+
+## Manual Installation
 
 ## 1. Deploy OpenShift Cluster 
 ```

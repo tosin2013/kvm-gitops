@@ -6,7 +6,7 @@ subscription-manager register
 subscription-manager refresh
 subscription-manager attach --auto
 subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
-dnf install git vim unzip wget bind-utils tar podman ansible jq python3-pip genisoimage nmstate -y 
+dnf install git vim unzip wget bind-utils tar podman ansible jq python3-pip genisoimage nmstate dialog -y 
 
 
 curl -OL https://raw.githubusercontent.com/tosin2013/openshift-4-deployment-notes/master/pre-steps/configure-openshift-packages.sh
@@ -16,6 +16,7 @@ rm configure-openshift-packages.sh
 
 pip3 install jmespath
 pip3 install j2cli
+pip3 install -U pywebio
 
 git clone https://github.com/tosin2013/openshift-4-deployment-notes.git
 git clone https://github.com/tosin2013/openshift-virtualization-gitops.git
@@ -33,4 +34,5 @@ cat ${HOME}/gitea-password.txt
 ansible-playbook -i  inventories/production/hosts configure-gitea.yml --extra-vars "gitea_admin=svc-gitea gitea_password=${GITEA_PASSWORD} endpoint=${GITEA_URL}"
 echo "cat ${HOME}/gitea-password.txt"
 
-
+sudo  firewall-cmd --permanent --zone=public --add-port=8081/tcp
+sudo firewall-cmd --reload
