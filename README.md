@@ -15,7 +15,7 @@ chmod +x install.sh
 ```
 
 ## Using UI
-python3 setup.py 
+python3 scripts/setup.py
 go to http://localhost:8081/ or http://ipaddress:8081/ui/
 
 
