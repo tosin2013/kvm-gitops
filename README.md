@@ -9,7 +9,9 @@ Requirements
 Quick start
 ------------
 ```
-./scripts/install.sh
+curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/install.sh
+chmod +x install.sh
+./install.sh
 ```
 
 ## Using UI
