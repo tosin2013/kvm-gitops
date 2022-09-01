@@ -21,8 +21,8 @@ pip3 install -U pywebio
 git clone https://github.com/tosin2013/openshift-4-deployment-notes.git
 git clone https://github.com/tosin2013/openshift-virtualization-gitops.git
 cd openshift-virtualization-gitops
-ansible-galaxy install --force -r roles/requirements.yml
-ansible-galaxy collection install --force -r collections/requirements.yml
+ansible-galaxy install --force -r roles/requirements.yml || exit $?
+ansible-galaxy collection install --force -r collections/requirements.yml|| exit $?
 
 sudo useradd svc-gitea
 export GITEA_PASSWORD=$(openssl rand -base64 12) 
