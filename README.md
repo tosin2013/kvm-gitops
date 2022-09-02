@@ -35,8 +35,39 @@ cp avi inventories/dev inventories/r640
 **Make changes to repo and push to git repo**
 
 ## Configure Fetchit
+> To test the Fetchit, run the following command as root:
 ```
+sudo su - root
 ./scripts/configure-fetchit.sh
+```
+**Advanced Deployment**
+```
+git clone https://github.com/tosin2013/qubinode-installer.git
+sudo su - root
+systemctl enable podman.socket --now
+mkdir -p /opt/fetchit
+mkdir -p ~/.fetchit
+
+# Change Git URL
+cat  >/root/.fetchit/config.yaml<<EOF
+targetConfigs:
+- url:  http://CHANGEME:3000/svc-gitea/openshift-virtualization-gitops
+  username: svc-gitea
+  password: password
+  filetransfer:
+  - name: copy-vars
+    targetPath: inventories/virtual-lab/host_vars
+    destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
+    schedule: "*/1 * * * *"
+  branch: main
+EOF
+
+cp scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+systemctl enable fetchit --now
+
+podman ps 
+
+sudo su - admin 
 ```
 
 # Deploy OpenShift

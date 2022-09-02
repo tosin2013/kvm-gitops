@@ -12,7 +12,7 @@ sudo dnf install git vim unzip wget bind-utils tar podman ansible jq python3-pip
 sudo curl -OL https://raw.githubusercontent.com/tosin2013/openshift-4-deployment-notes/master/pre-steps/configure-openshift-packages.sh
 sudo chmod +x configure-openshift-packages.sh
 sudo ./configure-openshift-packages.sh -i
-rm configure-openshift-packages.sh
+sudp rm configure-openshift-packages.sh
 
 sudo pip3 install jmespath
 sudo pip3 install j2cli
