@@ -6,7 +6,6 @@ targetConfigs:
     destinationDirectory: /tmp/qubinode-test
     schedule: "*/1 * * * *"
   branch: main
-targetConfigs:
 - url: http://github.com/containers/fetchit
   filetransfer:
   - name: ft-ex
