@@ -28,9 +28,9 @@ $ git remote add origin http://yourip:3000/svc-gitea/openshift-virtualization-gi
 $ git push --set-upstream origin main
 ```
 
-## Configure Fetchit
+## Configure Fetchit - WIP
 ```
-http://192.168.1.88:3000/svc-gitea/openshift-virtualization-gitops.git
+./scripts/configure-fetchit.sh
 ```
 
 # Deploy OpenShift
@@ -87,6 +87,10 @@ vim ~/ocp-pull-secret
 ## 3. Configure Openshift Virtualization
 
 ## 4. Configure GitOps Via ACM
+
+# Troubleshooting
+* If you are having issues logging on to gitea from the user stop and start the podman container.
+
 
 Links
 ------
