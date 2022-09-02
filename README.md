@@ -11,6 +11,7 @@ Quick start
 ```
 curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/install.sh
 chmod +x install.sh
+export CONFIGURE_GITEA=true
 ./install.sh
 ```
 
@@ -27,6 +28,11 @@ $ git remote remove origin
 $ git remote add origin http://yourip:3000/svc-gitea/openshift-virtualization-gitops.git
 $ git push --set-upstream origin main
 ```
+## Optional: Copy inventory to custom name example: r640
+```
+cp avi inventories/dev inventories/r640
+```
+**Make changes to repo and push to git repo**
 
 ## Configure Fetchit
 ```
