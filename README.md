@@ -14,10 +14,34 @@ chmod +x install.sh
 ./install.sh
 ```
 
+## Configure Git Repo
+Access the Git Repo
+![20220901133951](https://i.imgur.com/YyW1EwK.png)
+```
+$ cat ~/gitea-password.txt
+```
+
+Commit local openshit virtualization repo to the Git Repo
+```
+$ git remote remove origin
+$ git remote add origin http://yourip:3000/svc-gitea/openshift-virtualization-gitops.git
+$ git push --set-upstream origin main
+```
+
+## Configure Fetchit
+```
+http://192.168.1.88:3000/svc-gitea/openshift-virtualization-gitops.git
+```
+
+# Deploy OpenShift
+
 ## Using UI
+![20220901131141](https://i.imgur.com/wfbeoFW.png)
+```
+cd openshift-virtualization-gitops
 python3 scripts/setup.py
 go to http://localhost:8081/ or http://ipaddress:8081/ui/
-
+```
 
 ## Manual Installation
 
