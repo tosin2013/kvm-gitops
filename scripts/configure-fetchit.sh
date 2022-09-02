@@ -1,4 +1,4 @@
-## NOTES
+#!/bin/bash
 
 
 systemctl enable podman.socket --now

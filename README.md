@@ -14,7 +14,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-## Configure Git Repo
+## Optional: Configure Git Repo
 Access the Git Repo
 ![20220901133951](https://i.imgur.com/YyW1EwK.png)
 ```
@@ -28,7 +28,7 @@ $ git remote add origin http://yourip:3000/svc-gitea/openshift-virtualization-gi
 $ git push --set-upstream origin main
 ```
 
-## Configure Fetchit - WIP
+## Configure Fetchit
 ```
 ./scripts/configure-fetchit.sh
 ```
