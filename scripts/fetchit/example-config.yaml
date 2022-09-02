@@ -1,0 +1,12 @@
+targetConfigs:
+- url: http://github.com/containers/fetchit
+  branch: main
+  fileTransfer:
+  - name: ft-ex
+    targetPath: examples/fileTransfer
+    destinationDirectory: /tmp
+    schedule: "*/1 * * * *" 
+  raw:
+  - name: raw-ex
+    targetPath: examples/raw
+    schedule: "*/1 * * * *"

@@ -1,0 +1,10 @@
+targetConfigs:
+- url:  http://CHANGEME:3000/svc-gitea/openshift-virtualization-gitops
+  username: svc-gitea
+  password: COmp123$%
+  filetransfer:
+  - name: copy-vars
+    targetPath: inventories/virtual-lab/host_vars
+    destinationDirectory: /root/qubinode-installer/playbooks/vars
+    schedule: "*/1 * * * *"
+  branch: main
