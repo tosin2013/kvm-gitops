@@ -48,10 +48,10 @@ systemctl enable podman.socket --now
 mkdir -p /opt/fetchit
 mkdir -p ~/.fetchit
 
-# Change Git URL
+# Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
-- url:  http://CHANGEME:3000/svc-gitea/openshift-virtualization-gitops
+- url:  http://yourrepo:3000/tosin/openshift-virtualization-gitops.git
   username: svc-gitea
   password: password
   filetransfer:
@@ -62,12 +62,12 @@ targetConfigs:
   branch: main
 EOF
 
-cp scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+cp /home/admin/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
 systemctl enable fetchit --now
 
 podman ps 
 
-sudo su - admin 
+exit
 ```
 
 # Deploy OpenShift
