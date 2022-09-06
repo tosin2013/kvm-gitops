@@ -36,8 +36,12 @@ Commit local OpenShift virtualization repo to the Git Repo::
 Optional: Copy inventory to custom name example: r640
 --------------------------------------------------------
 Example:: 
-
+    
+    mkdir -p ~/inventory/r640
     cp avi inventories/dev inventories/r640
+    git add inventories/r640
+    git commit -m "pushing r640 inventory"
+    git push 
 
 **Make changes to repo and push to git repo**
 
@@ -50,8 +54,10 @@ To test the Fetchit, run the following command as root::
 
 Advanced Deployment
 ~~~~~~~~~~~~~~~~~~~
+Example Deployment: https://qubinode-installer.readthedocs.io/en/latest/gitops_deployment.html
 Advanced Deployment Example::
-
+    sudo su - admin 
+    cd ~
     git clone https://github.com/tosin2013/qubinode-installer.git
     sudo su - root
     systemctl enable podman.socket --now
@@ -65,10 +71,10 @@ Change Git URL to your Git Repo::
     targetConfigs:
     - url:  ${GITURL}
       username: svc-gitea
-      password: password
+      password: CHANGEME
       filetransfer:
       - name: copy-vars
-        targetPath: inventories/virtual-lab/host_vars
+        targetPath: inventories/CHANGEME/host_vars
         destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
         schedule: "*/1 * * * *"
       branch: main
