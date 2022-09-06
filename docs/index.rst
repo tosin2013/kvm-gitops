@@ -17,7 +17,7 @@ Quick start::
 
 Optional: Configure Git Repo
 ----------------------------
-Access the Git Repo:
+Access the Git Repo::
     
     $ cat ~/gitea-password.txt
 
