@@ -91,8 +91,6 @@ Using UI::
 .. image:: https://i.imgur.com/wfbeoFW.png
    :width: 600
 
-ainer.
-
 
 Links
 ------
