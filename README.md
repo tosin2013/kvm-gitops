@@ -42,6 +42,7 @@ sudo su - root
 ```
 **Advanced Deployment**
 ```
+sudo su - admin 
 git clone https://github.com/tosin2013/qubinode-installer.git
 sudo su - root
 systemctl enable podman.socket --now
@@ -49,9 +50,10 @@ mkdir -p /opt/fetchit
 mkdir -p ~/.fetchit
 
 # Change Git URL to your Git Repo
+GITURL="http://yourrepo:3000/tosin/openshift-virtualization-gitops.git"
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
-- url:  http://yourrepo:3000/tosin/openshift-virtualization-gitops.git
+- url:  ${GITURL}
   username: svc-gitea
   password: password
   filetransfer:
