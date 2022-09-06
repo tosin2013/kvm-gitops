@@ -40,7 +40,8 @@ cp avi inventories/dev inventories/r640
 sudo su - root
 ./scripts/configure-fetchit.sh
 ```
-**Advanced Deployment**
+**Optional: Advanced Deployment**
+> See [Qubinode GitOps Deployment](https://qubinode-installer.readthedocs.io/en/latest/gitops_deployment.html) for more details.
 ```
 sudo su - admin 
 git clone https://github.com/tosin2013/qubinode-installer.git
