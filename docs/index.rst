@@ -26,7 +26,7 @@ Access the Git Repo::
 
 
 
-Commit local openshit virtualization repo to the Git Repo::
+Commit local OpenShift virtualization repo to the Git Repo::
 
     $ git remote remove origin
     $ git remote add origin http://yourip:3000/svc-gitea/openshift-virtualization-gitops.git
@@ -48,7 +48,8 @@ To test the Fetchit, run the following command as root::
     sudo su - root
     ./scripts/configure-fetchit.sh
 
-**Advanced Deployment**
+Advanced Deployment
+~~~~~~~~~~~~~~~~~~~
 Advanced Deployment Example::
 
     git clone https://github.com/tosin2013/qubinode-installer.git
