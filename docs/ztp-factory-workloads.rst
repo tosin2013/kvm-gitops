@@ -39,3 +39,8 @@ Install Openshift Data Foundation Instance - WIP::
     oc login -u kubeadmin -p 4Z3-5Z3-5Z3-5Z3-5Z3 https://api.crc.testing:6443
     cd gitops-catalog/
     oc apply -k openshift-data-foundation-operator/instance/overlays/bare-metal/
+
+Set Default Storage Class::
+
+    oc login -u kubeadmin -p 4Z3-5Z3-5Z3-5Z3-5Z3 https://api.crc.testing:6443
+    oc patch storageclass ocs-storagecluster-cephfs -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
