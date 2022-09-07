@@ -23,7 +23,7 @@ Install Openshift Local Storage Instance::
 
     oc login -u kubeadmin -p 4Z3-5Z3-5Z3-5Z3-5Z3 https://api.crc.testing:6443
     cd gitops-catalog/
-    # update ksutommize with your node name
+    # update kustomize with your node name
     vim instance/overlays/bare-metal/kustomization.yaml
     oc apply -k instance/overlays/bare-metal
     # push updates to git repo 
