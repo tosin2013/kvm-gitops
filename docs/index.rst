@@ -3,6 +3,11 @@ OpenShift Virtualization GitOps Repository
 
 This repository is used to manage the OpenShift Virtualization GitOps Deployments in a Gitops Manner. 
 
+.. toctree::
+    :maxdepth: 2
+
+    gitops-catalog
+
 Requirements
 ------------
 * RHEL 8.x tested on RHEL 8.6
