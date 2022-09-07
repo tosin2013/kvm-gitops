@@ -7,6 +7,7 @@ This repository is used to manage the OpenShift Virtualization GitOps Deployment
     :maxdepth: 2
 
     gitops-catalog
+    ztp-factory-workloads
 
 Requirements
 ------------
