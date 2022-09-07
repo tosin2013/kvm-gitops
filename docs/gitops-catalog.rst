@@ -3,7 +3,9 @@ GitOps Catalog
 The GitOps Catalog includes kustomize bases and overlays for a number of OpenShift operators and applications
 
 
-git clone  http://10.1.240.46:3000/svc-gitea/gitops-catalog.git 
+clone gitops-catalog from your repo::
+
+    git clone  http://your-git-server:3000/svc-gitea/gitops-catalog.git 
 
 
 Deploy ArgoCD
@@ -14,6 +16,7 @@ Deploy ArgoCD using the ArgoCD Operator::
     oc apply -k overlays/gitops-1.6
 
 Deploy ArgoCD insatance::
+
     cat >/tmp/argoinstance.yaml<<EOF
     apiVersion: argoproj.io/v1alpha1
     kind: ArgoCD
