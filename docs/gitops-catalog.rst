@@ -1,6 +1,6 @@
 GitOps Catalog
 ==========================================
-The GitOps Catalog includes kustomize bases and overlays for a number of OpenShift operators and applications
+The `GitOps Catalog <https://github.com/redhat-cop/gitops-catalog>`_ includes kustomize bases and overlays for a number of OpenShift operators and applications
 
 
 clone gitops-catalog from your repo::
