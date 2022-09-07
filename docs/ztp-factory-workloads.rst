@@ -34,7 +34,7 @@ Install Openshift Data Foundation Operator::
     cd gitops-catalog/
     oc apply -k openshift-data-foundation-operator/operator/overlays/stable-4.11
 
-Install Openshift Data Foundation Instance::
+Install Openshift Data Foundation Instance - WIP::
 
     oc login -u kubeadmin -p 4Z3-5Z3-5Z3-5Z3-5Z3 https://api.crc.testing:6443
     cd gitops-catalog/
