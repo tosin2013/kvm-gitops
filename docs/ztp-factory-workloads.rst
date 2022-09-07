@@ -27,3 +27,9 @@ Install Openshift Local Storage Instance::
     vim instance/overlays/bare-metal/kustomization.yaml
     oc apply -k instance/overlays/bare-metal
     # push updates to git repo 
+
+Install Openshift Data Foundation  Operator::
+
+    oc login -u kubeadmin -p 4Z3-5Z3-5Z3-5Z3-5Z3 https://api.crc.testing:6443
+    cd gitops-catalog/
+    oc apply -k openshift-data-foundation-operator/operator/overlays/stable-4.11
