@@ -56,6 +56,8 @@ if [ ${CONFIGURE_GITEA} == true ]; then
     sudo ansible-playbook -i  inventories/production/hosts configure-gitea.yml --extra-vars "gitea_admin=svc-gitea gitea_password=${GITEA_PASSWORD} endpoint=${GITEA_URL}"
     echo "cat ${HOME}/gitea-password.txt"
     sudo  firewall-cmd --permanent --zone=public --add-port=3000/tcp
+    sudo podman stop gitea
+    sudo podman start gitea
 fi
 
 sudo  firewall-cmd --permanent --zone=public --add-port=8081/tcp

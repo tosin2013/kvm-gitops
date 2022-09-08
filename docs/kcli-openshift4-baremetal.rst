@@ -79,6 +79,18 @@ Configure KVM using Qubinode::
     ./qubinode-installer -p kcli
     ./qubinode-installer -p gozones
 
+Configure baremetal network::
+
+    export MAIN_CONN=eno2
+    sudo nmcli connection add ifname baremetal type bridge con-name baremetal
+    sudo nmcli con add type bridge-slave ifname $MAIN_CONN master baremetal
+    sudo nmcli con down $MAIN_CONN; sudo pkill dhclient; sudo dhclient baremetal
+
+
+Install Quay Mirror Registry 
+----------------------------
+* https://qubinode-installer.readthedocs.io/en/latest/quay_mirror_registry.html
+
 
 Links:
 ~~~~~~
