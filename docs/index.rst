@@ -8,6 +8,8 @@ This repository is used to manage the OpenShift Virtualization GitOps Deployment
 
     gitops-catalog
     ztp-factory-workloads
+    advanced-gitops-deployments
+    sno-gitops-bootstrap-server
 
 Requirements
 ------------
