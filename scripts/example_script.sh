@@ -36,5 +36,5 @@ targetConfigs:
   branch: main
 EOF
 
-cp /home/admin/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+cp $HOME/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
 systemctl enable fetchit --now

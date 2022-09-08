@@ -88,7 +88,7 @@ Change Git URL to your Git Repo::
       branch: main
     EOF
 
-    cp /home/admin/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+    cp ~/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
     systemctl enable fetchit --now
 
     podman ps 
