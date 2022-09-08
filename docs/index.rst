@@ -10,6 +10,8 @@ This repository is used to manage the OpenShift Virtualization GitOps Deployment
     ztp-factory-workloads
     advanced-gitops-deployments
     sno-gitops-bootstrap-server
+    kcli-openshift4-baremetal
+
 
 Requirements
 ------------

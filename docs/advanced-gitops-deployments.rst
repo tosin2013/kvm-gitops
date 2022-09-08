@@ -11,7 +11,8 @@ Options
 2. Change the username and password for git
 
 Example Run::
-
+    
+    sudo su - root 
     curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/example_script.sh
     chmod +x example_script.sh
     ./example_script.sh your_directory_name

@@ -2,12 +2,29 @@
 
 set -xe 
 
-sudo subscription-manager register
-sudo subscription-manager refresh
-sudo subscription-manager attach --auto
-sudo subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
-sudo dnf install git vim unzip wget bind-utils tar podman ansible jq python3-pip genisoimage nmstate dialog -y 
 
+function get_distro() {
+    if [[ -f /etc/os-release ]]
+    then
+        # On Linux systems
+        source /etc/os-release
+        echo $ID
+    else
+        # On systems other than Linux (e.g. Mac or FreeBSD)
+        uname
+    fi
+}
+
+if [ $(get_distro) == "rhel" ]; then
+    sudo subscription-manager register
+    sudo subscription-manager refresh
+    sudo subscription-manager attach --auto
+    sudo subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
+elif [ $(get_distro) == "centos" ]; then
+    sudo yum install epel-release -y 
+fi 
+
+sudo dnf install git vim unzip wget bind-utils tar podman ansible jq python3-pip genisoimage nmstate dialog -y 
 
 sudo curl -OL https://raw.githubusercontent.com/tosin2013/openshift-4-deployment-notes/master/pre-steps/configure-openshift-packages.sh
 sudo chmod +x configure-openshift-packages.sh
