@@ -166,6 +166,10 @@ case $INSTALL_TYPE in
     openshift-4-deployment-notes
     ;;
 
+  openshift-4-deployment-notes-lab)
+    openshift-4-deployment-notes-lab
+    ;;
+
   openshift-aio)
     openshift-aio
     ;;
@@ -176,8 +180,12 @@ case $INSTALL_TYPE in
     ;;
 esac
 
+if [ $( podman ps -a -f name='fetchit' | grep fetchit | wc -l) -eq 0 ]; then
+  cp $HOME/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+  systemctl enable fetchit --now
+else
+  podman stop fetchit
+fi 
 
-cp $HOME/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
-systemctl enable fetchit --now
-
-
+sleep 15s
+podman logs fetchit
