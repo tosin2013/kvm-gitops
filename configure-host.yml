@@ -98,7 +98,7 @@
     tags: install_oc_cli
   - name: Install pip modules
     ansible.builtin.pip:
-      requirements: scripts/requirements.txt
+      requirements: "{{playbook_dir}}/scripts/requirements.txt"
     tags: install_pip_modules
   - name: Enable  podman socket service
     ansible.builtin.service:
