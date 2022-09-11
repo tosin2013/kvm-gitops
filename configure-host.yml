@@ -6,21 +6,22 @@
     rhsm_activationkey: rhel-server
     rhsm_org_id: ACME
   tasks:
-  - name: run subscription rolefor RHEL 8
-    include_role:
+  - name: run subscription role for RHEL 8
+    ansible.builtin.include_role:
+      name: swygue-redhat-subscription
     vars:
       rhsm_repos:
         - rhel-8-for-x86_64-baseos-rpms
         - rhel-8-for-x86_64-appstream-rpms 
-      name: swygue-redhat-subscription
     when: (( ansible_distribution == "RedHat" and ansible_distribution_major_version == '8'))
+    tags: rhsm 
   - name: run subscription role for RHEL 9
-    include_role:
+    ansible.builtin.include_role:
+      name: swygue-redhat-subscription
     vars:
       rhsm_repos:
         - rhel-9-for-x86_64-baseos-rpms
         - rhel-9-for-x86_64-appstream-rpms
-      name: swygue-redhat-subscription
     when: (( ansible_distribution == "RedHat" and ansible_distribution_major_version == '9'))
     tags: rhsm 
   - name: Install required packages for RHEL 8 
