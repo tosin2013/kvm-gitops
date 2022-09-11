@@ -13,6 +13,7 @@
       rhsm_repos:
         - rhel-8-for-x86_64-baseos-rpms
         - rhel-8-for-x86_64-appstream-rpms 
+        - ansible-2.9-for-rhel-8-x86_64-rpms
     when: (( ansible_distribution == "RedHat" and ansible_distribution_major_version == '8'))
     tags: rhsm 
   - name: run subscription role for RHEL 9
