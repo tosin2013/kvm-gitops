@@ -2,6 +2,7 @@
 # example example_script.sh isntall-type kcli-openshift4-baremetal-dsal "http://yourrepo:3000/tosin/openshift-virtualization-gitops.git svc-gitea CHANGEME"
 
 function qubinode-installer(){
+  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t qubinode-installer
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -18,6 +19,7 @@ EOF
 }
 
 function kcli-openshift4-baremetal(){
+  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t kcli-openshift4-baremetal
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -34,6 +36,7 @@ EOF
 }
 
 function kcli-openshift4-baremetal-lab(){
+  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t kcli-openshift4-baremetal-lab
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -55,6 +58,7 @@ EOF
 }
 
 function openshift-4-deployment-notes(){
+  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t openshift-4-deployment-notes
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -71,6 +75,7 @@ EOF
 }
 
 function openshift-aio(){
+  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t openshift-aio
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
