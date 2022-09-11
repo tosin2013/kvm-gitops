@@ -1,7 +1,7 @@
 - name: Configure Host
   hosts: localhost
   become: true
-   gather_facts: true
+  gather_facts: true
   vars:
     rhsm_activationkey: rhel-server
     rhsm_org_id: ACME
@@ -87,5 +87,13 @@
       state: latest
     tags: install_packages
     when: (ansible_distribution == "Fedora")
-
+  - name: Download file from a file path
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/tosin2013/openshift-4-deployment-notes/master/pre-steps/configure-openshift-packages.sh
+      dest: /tmp/configure-openshift-packages.sh
+      mode: '0775'
+    tags: install_oc_cli
+  - name: Run command if /path/to/database does not exist (without 'args')
+    ansible.builtin.command: /tmp/configure-openshift-packages.sh -i
+    tags: install_oc_cli
 
