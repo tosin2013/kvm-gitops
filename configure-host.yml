@@ -1,0 +1,13 @@
+- name: Configure Host
+  hosts: localhost
+  become: true
+   gather_facts: true
+  vars:
+    rhsm_activationkey: rhel-server
+    rhsm_org_id: ACME
+  tasks:
+  - name: run subscription role
+    include_role:
+      name: swygue-redhat-subscription
+    when: (("RedHat" and ansible_distribution_major_version == '8') and ("RedHat" and ansible_distribution_major_version == '9'))
+    

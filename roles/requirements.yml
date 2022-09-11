@@ -1,2 +1,4 @@
 - src: https://github.com/kenmoini/ocp4-ai-svc-universal.git
   version: main
+- src: https://github.com/Qubinode/swygue-redhat-subscription.git
+  version: v2.4.6
