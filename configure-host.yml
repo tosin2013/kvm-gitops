@@ -9,5 +9,83 @@
   - name: run subscription role
     include_role:
       name: swygue-redhat-subscription
-    when: (("RedHat" and ansible_distribution_major_version == '8') and ("RedHat" and ansible_distribution_major_version == '9'))
-    
+    when: (( ansible_distribution == "RedHat" and ansible_distribution_major_version == '8') and ( ansible_distribution == "RedHat" and ansible_distribution_major_version == '9'))
+    tags: rhsm 
+  - name: Install required packages for RHEL 8 
+    ansible.builtin.package:
+      name:
+        - git
+        - vim 
+        - unzip 
+        - wget
+        - bind-utils
+        - tar
+        - podman
+        - ansible
+        - jq
+        - python3-pip
+        - genisoimage
+        - nmstate
+        - dialog
+      state: latest
+    tags: install_packages
+    when: ( ansible_distribution == "RedHat" and ansible_distribution_major_version == '8')
+  - name: Install required packages for RHEL 9
+    ansible.builtin.package:
+      name:
+        - git
+        - vim 
+        - unzip 
+        - wget
+        - bind-utils
+        - tar
+        - podman
+        - ansible-core
+        - jq
+        - python3-pip
+        - genisoimage
+        - nmstate
+        - dialog
+      state: latest
+    tags: install_packages
+    when: ( ansible_distribution == "RedHat" and ansible_distribution_major_version == '9')
+  - name: Install required packages for CENTOS
+    ansible.builtin.package:
+      name:
+        - git
+        - vim 
+        - unzip 
+        - wget
+        - bind-utils
+        - tar
+        - podman
+        - ansible
+        - jq
+        - python3-pip
+        - genisoimage
+        - nmstate
+        - dialog
+      state: latest
+    tags: install_packages
+    when: (ansible_distribution == "CentOS")
+  - name: Install required packages for FEDORA
+    ansible.builtin.package:
+      name:
+        - git
+        - vim 
+        - unzip 
+        - wget
+        - bind-utils
+        - tar
+        - podman
+        - ansible
+        - jq
+        - python3-pip
+        - genisoimage
+        - nmstate
+        - dialog
+      state: latest
+    tags: install_packages
+    when: (ansible_distribution == "Fedora")
+
+
