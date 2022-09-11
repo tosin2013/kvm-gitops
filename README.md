@@ -8,11 +8,23 @@ Requirements
 
 Quick start
 ------------
+**Using Shell Script**
 ```
 curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/install.sh
 chmod +x install.sh
-export CONFIGURE_GITEA=true
 ./install.sh
+```
+
+**Using Ansible**
+> This is useful when you want to use Ansible to install OpenShift Virtualization GitOps. Against remote machines.
+```
+ansible-playbook -i  inventories/production/hosts configure-host.yml --extra-vars "rhsm_activationkey=keyname rhsm_org_id=orgid"
+```
+
+# Optional: Install Gitea on Host
+```
+export CONFIGURE_GITEA=true
+./scripts/configure_gitea.sh
 ```
 
 ## Optional: Configure Git Repo

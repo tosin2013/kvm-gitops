@@ -87,7 +87,7 @@
       state: latest
     tags: install_packages
     when: (ansible_distribution == "Fedora")
-  - name: Download file from a file path
+  - name: Download Openshift Install Script
     ansible.builtin.get_url:
       url: https://raw.githubusercontent.com/tosin2013/openshift-4-deployment-notes/master/pre-steps/configure-openshift-packages.sh
       dest: /tmp/configure-openshift-packages.sh
@@ -108,3 +108,13 @@
     ansible.builtin.service:
       name: podman.socket
       state: started
+  - name: permit traffic in default zone on port 8081/tcp
+    ansible.posix.firewalld:
+      port: 8081/tcp
+      permanent: yes
+      state: enabled
+  - name: Download Openshift Install Script
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/example_script.sh
+      dest: /root/example_script.sh
+      mode: '0775'
