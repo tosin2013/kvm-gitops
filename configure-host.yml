@@ -100,3 +100,11 @@
     ansible.builtin.pip:
       requirements: scripts/requirements.txt
     tags: install_pip_modules
+  - name: Enable  podman socket service
+    ansible.builtin.service:
+      name: podman.socket
+      enabled: yes
+  - name: Start  podman socket service
+    ansible.builtin.service:
+      name: podman.socket
+      state: started
