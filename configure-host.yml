@@ -103,17 +103,17 @@
   - name: Enable  podman socket service
     ansible.builtin.service:
       name: podman.socket
-      enabled: yes
+      enabled: true
     tags: enable_podman_socket
   - name: Start  podman socket service
     ansible.builtin.service:
       name: podman.socket
       state: started
     tags: enable_podman_socket
-  - name: permit traffic in default zone on port 8081/tcp
+  - name: permit traffic in default zone on port 8081
     ansible.posix.firewalld:
       port: 8081/tcp
-      permanent: yes
+      permanent: true
       state: enabled
     tags: configure_firewalld
   - name: Download Openshift Install Script
