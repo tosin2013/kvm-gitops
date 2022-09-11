@@ -1,0 +1,36 @@
+- name: Install Sync Repository
+  hosts: localhost
+  become: true
+
+  tasks:
+   - name: Qubinode Installer Script for KVM configration
+    ansible.builtin.git:
+      repo: https://github.com/tosin2013/qubinode-installer.git
+      dest: /home/admin/qubinode-installer
+      single_branch: yes
+      version: master
+    tags: qubinode-installer
+
+  - name: kcli-openshift4-baremetal repository for bare metal IPI
+    ansible.builtin.git:
+      repo: https://github.com/karmab/kcli-openshift4-baremetal.git
+      dest: /root/kcli-openshift4-baremetal
+      single_branch: yes
+      version: master
+    tags: kcli-openshift4-baremetal
+
+  - name: openshift-4-deployment-notes repository for manual assisted-installer
+    ansible.builtin.git:
+      repo: https://github.com/tosin2013/openshift-4-deployment-notes.git
+      dest:  /home/admin/openshift-4-deployment-notes
+      single_branch: yes
+      version: master
+    tags: openshift-4-deployment-notes
+
+  - name: OpenShift All-in-One deployment automation repository
+    ansible.builtin.git:
+      repo: https://github.com/RHFieldProductManagement/openshift-aio.git
+      dest:  /root/openshift-aio
+      single_branch: yes
+      version: main
+    tags: openshift-aio
