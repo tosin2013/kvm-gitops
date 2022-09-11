@@ -110,7 +110,7 @@
       name: podman.socket
       state: started
     tags: enable_podman_socket
-  - name: permit traffic in default zone on port 8081
+  - name: Configure Firewalld
     ansible.posix.firewalld:
       port: 8081/tcp
       permanent: true
