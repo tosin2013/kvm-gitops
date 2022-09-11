@@ -93,7 +93,10 @@
       dest: /tmp/configure-openshift-packages.sh
       mode: '0775'
     tags: install_oc_cli
-  - name: Run command if /path/to/database does not exist (without 'args')
+  - name: Install OpenShift cli packages
     ansible.builtin.command: /tmp/configure-openshift-packages.sh -i
     tags: install_oc_cli
-
+  - name: Install pip modules
+    ansible.builtin.pip:
+      requirements: scripts/requirements.txt
+    tags: install_pip_modules
