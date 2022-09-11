@@ -1,5 +1,5 @@
 - name: Configure Host
-  hosts: localhost
+  hosts: baremetal
   become: true
   gather_facts: true
   vars:
