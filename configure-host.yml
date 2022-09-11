@@ -109,6 +109,13 @@
   - name: Install OpenShift cli packages
     ansible.builtin.command: /tmp/configure-openshift-packages.sh -i
     tags: install_oc_cli
+  - name: openshift-virtualization-gitops clone 
+    ansible.builtin.git:
+      repo: https://github.com/tosin2013/openshift-virtualization-gitops.git
+      dest: /home/admin/openshift-virtualization-gitops
+      single_branch: yes
+      version: main
+    tags: install_pip_modules
   - name: Install pip modules
     ansible.builtin.pip:
       requirements: "{{playbook_dir}}/scripts/requirements.txt"
