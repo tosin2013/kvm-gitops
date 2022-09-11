@@ -18,6 +18,7 @@ chmod +x install.sh
 **Using Ansible**
 > This is useful when you want to use Ansible to install OpenShift Virtualization GitOps. Against remote machines.
 ```
+ansible-galaxy collection install ansible.posix
 ansible-playbook -i  inventories/production/hosts configure-host.yml --extra-vars "rhsm_activationkey=keyname rhsm_org_id=orgid"
 ```
 
