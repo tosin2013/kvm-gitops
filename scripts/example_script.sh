@@ -1,5 +1,6 @@
 #!/bin/bash
 # example example_script.sh isntall-type kcli-openshift4-baremetal-dsal "http://yourrepo:3000/tosin/openshift-virtualization-gitops.git svc-gitea CHANGEME"
+set -xe 
 
 function qubinode-installer(){
   ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t qubinode-installer
@@ -36,7 +37,7 @@ EOF
 }
 
 function kcli-openshift4-baremetal-lab(){
-  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t kcli-openshift4-baremetal-lab
+  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t qubinode-installer -t kcli-openshift4-baremetal
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -49,6 +50,10 @@ targetConfigs:
     destinationDirectory: /root/kcli-openshift4-baremetal/paramfiles
     schedule: "*/1 * * * *"
   branch: main
+- url: ${GITURL}
+  username: ${GIT_USERNAME}
+  password: ${GIT_PASSWORD}
+  filetransfer:
   - name: qubinode-installer
     targetPath: inventories/${DIRECTORY_PATH}/host_vars
     destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
@@ -74,6 +79,32 @@ targetConfigs:
 EOF
 }
 
+function openshift-4-deployment-notes-lab(){
+  ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t qubinode-installer -t openshift-4-deployment-notes
+# Change Git URL to your Git Repo
+cat  >/root/.fetchit/config.yaml<<EOF
+targetConfigs:
+- url: ${GITURL}
+  username: ${GIT_USERNAME}
+  password: ${GIT_PASSWORD}
+  filetransfer:
+  - name: copy-vars
+    targetPath: inventories/${DIRECTORY_PATH}/manual-assisted-installer
+    destinationDirectory: /home/admin/openshift-4-deployment-notes/assisted-installer
+    schedule: "*/1 * * * *"
+  branch: main
+- url: ${GITURL}
+  username: ${GIT_USERNAME}
+  password: ${GIT_PASSWORD}
+  filetransfer:
+  - name: qubinode-installer
+    targetPath: inventories/${DIRECTORY_PATH}/host_vars
+    destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
+    schedule: "*/1 * * * *"
+  branch: main
+EOF
+}
+
 function openshift-aio(){
   ansible-playbook  -i  openshift-virtualization-gitops/inventories/production/host openshift-virtualization-gitops/configure-repos.yml -t openshift-aio
 # Change Git URL to your Git Repo
@@ -92,7 +123,7 @@ EOF
 }
 
 if [ $# -ne 5 ]; then
-    echo "Usage: $0 <qubinode-installer|kcli-openshift4-baremetal|kcli-openshift4-baremetal-lab|openshift-4-deployment-notes|openshift-aio> <directory_path> <git_url> <git_username> <git_password>"
+    echo "Usage: $0 <qubinode-installer|kcli-openshift4-baremetal|kcli-openshift4-baremetal-lab|openshift-4-deployment-notes|openshift-4-deployment-notes-lab|openshift-aio> <directory_path> <git_url> <git_username> <git_password>"
     exit 1
 fi
 
