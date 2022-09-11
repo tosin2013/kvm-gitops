@@ -9,7 +9,7 @@
   - name: run subscription role
     include_role:
       name: swygue-redhat-subscription
-    when: (( ansible_distribution == "RedHat" and ansible_distribution_major_version == '8') and ( ansible_distribution == "RedHat" and ansible_distribution_major_version == '9'))
+    when: (( ansible_distribution == "RedHat" and ansible_distribution_major_version == '8') or ( ansible_distribution == "RedHat" and ansible_distribution_major_version == '9'))
     tags: rhsm 
   - name: Install required packages for RHEL 8 
     ansible.builtin.package:
