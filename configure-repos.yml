@@ -32,6 +32,14 @@
       version: master
     tags: openshift-4-deployment-notes
 
+  - name: Recursively change ownership of openshift-4-deployment-notes directory 
+    ansible.builtin.file:
+      path: /home/admin/openshift-4-deployment-notes
+      state: directory
+      recurse: yes
+      owner: admin
+      group: admin
+
   - name: OpenShift All-in-One deployment automation repository
     ansible.builtin.git:
       repo: https://github.com/RHFieldProductManagement/openshift-aio.git
