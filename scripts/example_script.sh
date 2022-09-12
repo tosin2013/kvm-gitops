@@ -72,7 +72,7 @@ targetConfigs:
   password: ${GIT_PASSWORD}
   filetransfer:
   - name: copy-vars
-    targetPath: inventories/${DIRECTORY_PATH}/host_vars
+    targetPath: inventories/${DIRECTORY_PATH}/manual-assisted-installer
     destinationDirectory: /home/admin/openshift-4-deployment-notes/assisted-installer
     schedule: "*/1 * * * *"
   branch: main
