@@ -7,12 +7,12 @@ Change the ``example_script.sh`` items and run the script to configure fetchit t
 
 Options
 ~~~~~~~
-* TESTED: `qubinode-installer <https://github.com/tosin2013/qubinode-installer>`_ - Qubinode-installer is an utility tool that facilates the quick deployment of an array of Red Hat products like Red Hat Openshift Container Platform, Red Hat Identity Manager, Red Hat Satellite, etc.. on a single piece of hardware by leveraging the KVM hypervisor.  
-* TESTING:  `kcli-openshift4-baremetal <https://github.com/karmab/kcli-openshift4-baremetal>`_ - deploy baremetal ipi using a dedicated vm
-* TESTING: `kcli-openshift4-baremetal-lab` - deploy baremetal ipi using a dedicated vm emulated with qubinode installer
-* Will Test: `openshift-4-deployment-notes <https://github.com/tosin2013/openshift-4-deployment-notes/tree/master/assisted-installer>`_ - Assisted Installer Steps for Bare Metal machines with Static IPs
-* TESTING: `openshift-4-deployment-notes-lab`
-* Have not tested: `openshift-aio <https://github.com/RHFieldProductManagement/openshift-aio>`_ - Welcome to our OpenShift All-in-One deployment automation repository. Here you'll find Ansible playbooks that will allow you to deploy an "all in one" configuration of OpenShift with a wide variety of options and extensions via operators.
+* **TESTED:** `qubinode-installer <https://github.com/tosin2013/qubinode-installer>`_ - Qubinode-installer is an utility tool that facilates the quick deployment of an array of Red Hat products like Red Hat Openshift Container Platform, Red Hat Identity Manager, Red Hat Satellite, etc.. on a single piece of hardware by leveraging the KVM hypervisor.  
+* **TESTING:**  `kcli-openshift4-baremetal <https://github.com/karmab/kcli-openshift4-baremetal>`_ - deploy baremetal ipi using a dedicated vm
+* **TESTING:** `kcli-openshift4-baremetal-lab` - deploy baremetal ipi using a dedicated vm emulated with qubinode installer
+* **TESTED:** `openshift-4-deployment-notes <https://github.com/tosin2013/openshift-4-deployment-notes/tree/master/assisted-installer>`_ - Assisted Installer Steps for Bare Metal machines with Static IPs
+* **TESTING:** `openshift-4-deployment-notes-lab`
+* **Have not tested:** `openshift-aio <https://github.com/RHFieldProductManagement/openshift-aio>`_ - Welcome to our OpenShift All-in-One deployment automation repository. Here you'll find Ansible playbooks that will allow you to deploy an "all in one" configuration of OpenShift with a wide variety of options and extensions via operators.
 
 Example Run::
     
