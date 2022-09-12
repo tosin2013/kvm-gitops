@@ -10,6 +10,14 @@
       version: master
     tags: qubinode-installer
 
+  - name: Recursively change ownership of qubinode-installer directory 
+    ansible.builtin.file:
+      path: /home/admin/qubinode-installer
+      state: directory
+      recurse: yes
+      owner: admin
+      group: admin
+
   - name: kcli-openshift4-baremetal repository for bare metal IPI
     ansible.builtin.git:
       repo: https://github.com/karmab/kcli-openshift4-baremetal.git
