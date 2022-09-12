@@ -116,6 +116,7 @@
       dest: /home/admin/openshift-virtualization-gitops
       single_branch: yes
       version: main
+    tags: install_pip_modules
   - name: Recursively change ownership of openshift-virtualization-gitops directory 
     ansible.builtin.file:
       path: /home/admin/openshift-virtualization-gitops
