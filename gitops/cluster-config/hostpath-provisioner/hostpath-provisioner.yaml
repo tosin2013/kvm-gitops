@@ -5,6 +5,6 @@ metadata:
 spec:
   imagePullPolicy: IfNotPresent
   pathConfig:
-    path: "/dev/vdb" 
+    path: "/var/hpvolumes" 
     useNamingPrefix: false 
   workload: 
