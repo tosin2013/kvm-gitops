@@ -63,6 +63,11 @@
       state: latest
     tags: install_packages
     when: ( ansible_distribution == "RedHat" and ansible_distribution_major_version == '9')
+  - name: Enable EPEL Repository on CentOS
+    ansible.builtin.package:
+      name: epel-release
+      state: latest
+    when: (ansible_distribution == "CentOS")
   - name: Install required packages for CENTOS
     ansible.builtin.package:
       name:
@@ -112,7 +117,7 @@
     tags: install_oc_cli
   - name: openshift-virtualization-gitops clone 
     ansible.builtin.git:
-      repo: https://github.com/tosin2013/openshift-virtualization-gitops.git
+      repo: http://gitea.tosins-lab.com:3000/tosin/openshift-virtualization-gitops.git
       dest: /home/admin/openshift-virtualization-gitops
       single_branch: yes
       version: main
