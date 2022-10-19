@@ -1,16 +1,19 @@
-OpenShift Virtualization GitOps Repository
+KVM GitOps Repository
 ------------------------------------------
-This repository is used to manage the OpenShift Virtualization GitOps Deployments in a Gitops Manner. 
+This repository is used to manage the KVM instances in a Gitops Manner. 
 
-Requirements
+Tested On 
 ------------
-* RHEL 8.x tested on RHEL 8.6
+* RHEL 8.x
+* RHEL 9.x
+* CentOS 9 Streams 
+* Rocky Linux 8.x
 
 Quick start
 ------------
 **Using Shell Script**
 ```
-curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/install.sh
+curl -OL https://raw.githubusercontent.com/tosin2013/kvm-gitops/main/scripts/install.sh
 chmod +x install.sh
 ./install.sh
 ```
@@ -39,7 +42,7 @@ $ cat ~/gitea-password.txt
 Commit local openshit virtualization repo to the Git Repo
 ```
 $ git remote remove origin
-$ git remote add origin http://yourip:3000/svc-gitea/openshift-virtualization-gitops.git
+$ git remote add origin http://yourip:3000/svc-gitea/kvm-gitops.git
 $ git push --set-upstream origin main
 ```
 ## Optional: Copy inventory to custom name example: r640
@@ -65,7 +68,7 @@ mkdir -p /opt/fetchit
 mkdir -p ~/.fetchit
 
 # Change Git URL to your Git Repo
-GITURL="http://yourrepo:3000/tosin/openshift-virtualization-gitops.git"
+GITURL="http://yourrepo:3000/tosin/kvm-gitops.git"
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
 - url:  ${GITURL}
@@ -79,7 +82,7 @@ targetConfigs:
   branch: main
 EOF
 
-cp /home/admin/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+cp /home/admin/kvm-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
 systemctl enable fetchit --now
 
 podman ps 
@@ -92,7 +95,7 @@ exit
 ## Using UI
 ![20220901131141](https://i.imgur.com/wfbeoFW.png)
 ```
-cd openshift-virtualization-gitops
+cd kvm-gitops
 python3 scripts/setup.py
 go to http://localhost:8081/ or http://ipaddress:8081/ui/
 ```
@@ -104,7 +107,7 @@ go to http://localhost:8081/ or http://ipaddress:8081/ui/
 cd openshift-4-deployment-notes/assisted-installer/
 
 CLUSTER_SIZE=sno  # sno, converged, full
-cp $HOME/openshift-virtualization-gitops/example/${CLUSTER_SIZE}-cluster-vars.sh cluster-vars.sh
+cp $HOME/kvm-gitops/example/${CLUSTER_SIZE}-cluster-vars.sh cluster-vars.sh
 ```
 
 1. Get offline token and save it to `~/rh-api-offline-token`

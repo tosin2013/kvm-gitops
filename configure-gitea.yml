@@ -100,7 +100,7 @@
       copy:
         dest: "/tmp/file-repo.json"
         content: |
-          {"name": "openshift-virtualization-gitops"}
+          {"name": "kvm-gitops"}
 
     - name: Empty Repository
       uri:

@@ -1,5 +1,5 @@
 targetConfigs:
-- url:  http://CHANGEME:3000/svc-gitea/openshift-virtualization-gitops
+- url:  http://CHANGEME:3000/svc-gitea/kvm-gitops
   username: svc-gitea
   password: COmp123$%
   filetransfer:

@@ -1,7 +1,7 @@
-OpenShift Virtualization GitOps Repository
+KVM GitOps Repository
 ==========================================
 
-This repository is used to manage the OpenShift Virtualization GitOps Deployments in a Gitops Manner. 
+This repository is used to manage the KVM GitOps Deployments in a Gitops Manner. 
 
 .. toctree::
     :maxdepth: 2
@@ -19,7 +19,7 @@ Requirements
 
 Quick start::
 
-    curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/install.sh
+    curl -OL https://raw.githubusercontent.com/tosin2013/kvm-gitops/main/scripts/install.sh
     chmod +x install.sh
     export CONFIGURE_GITEA=true
     ./install.sh
@@ -39,7 +39,7 @@ Access the Git Repo::
 Commit local OpenShift virtualization repo to the Git Repo::
 
     $ git remote remove origin
-    $ git remote add origin http://yourip:3000/svc-gitea/openshift-virtualization-gitops.git
+    $ git remote add origin http://yourip:3000/svc-gitea/kvm-gitops.git
     $ git push --set-upstream origin main
 
 
@@ -76,7 +76,7 @@ Advanced Deployment Example::
 
 Change Git URL to your Git Repo::
 
-    GITURL="http://yourrepo:3000/tosin/openshift-virtualization-gitops.git"
+    GITURL="http://yourrepo:3000/tosin/kvm-gitops.git"
     cat  >/root/.fetchit/config.yaml<<EOF
     targetConfigs:
     - url:  ${GITURL}
@@ -90,7 +90,7 @@ Change Git URL to your Git Repo::
       branch: main
     EOF
 
-    cp ~/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+    cp ~/kvm-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
     systemctl enable fetchit --now
 
     podman ps 
@@ -102,7 +102,7 @@ Deploy OpenShift
 
 Using UI::
 
-    cd openshift-virtualization-gitops
+    cd kvm-gitops
     python3 scripts/setup.py
     go to http://localhost:8081/ or http://ipaddress:8081/ui/
 

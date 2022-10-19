@@ -162,8 +162,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'GitOps', 'OpenShift Virtualization GitOps Repository Documentation',
-     author, 'OpenShift Virtualization', 'OpenShift Virtualization GitOps Repository',
+    (master_doc, 'GitOps', 'Kvm GitOps Repository Documentation',
+     author, 'Kvm', 'Kvm GitOps Repository',
      'Miscellaneous'),
 ]
 

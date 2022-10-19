@@ -115,16 +115,16 @@
   - name: Install OpenShift cli packages
     ansible.builtin.command: /tmp/configure-openshift-packages.sh -i
     tags: install_oc_cli
-  - name: openshift-virtualization-gitops clone 
+  - name: kvm-gitops clone 
     ansible.builtin.git:
-      repo: http://gitea.tosins-lab.com:3000/tosin/openshift-virtualization-gitops.git
-      dest: /home/admin/openshift-virtualization-gitops
+      repo: http://gitea.tosins-lab.com:3000/tosin/kvm-gitops.git
+      dest: /home/admin/kvm-gitops
       single_branch: yes
       version: main
     tags: install_pip_modules
-  - name: Recursively change ownership of openshift-virtualization-gitops directory 
+  - name: Recursively change ownership of kvm-gitops directory 
     ansible.builtin.file:
-      path: /home/admin/openshift-virtualization-gitops
+      path: /home/admin/kvm-gitops
       state: directory
       recurse: yes
       owner: admin
@@ -152,7 +152,7 @@
     tags: configure_firewalld
   - name: Download Example GitOps Script
     ansible.builtin.get_url:
-      url: https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/example_script.sh
+      url: https://raw.githubusercontent.com/tosin2013/kvm-gitops/main/scripts/example_script.sh
       dest: /root/example_script.sh
       mode: '0775'
     tags: copy_example_script

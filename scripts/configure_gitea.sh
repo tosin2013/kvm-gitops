@@ -1,7 +1,7 @@
 #!/bin/bash 
 #git clone https://github.com/tosin2013/openshift-4-deployment-notes.git
-git clone https://github.com/tosin2013/openshift-virtualization-gitops.git
-cd openshift-virtualization-gitops
+git clone https://github.com/tosin2013/kvm-gitops.git
+cd kvm-gitops
 sudo ansible-galaxy install --force -r roles/requirements.yml || exit $?
 sudo ansible-galaxy collection install --force -r collections/requirements.yml|| exit $?
 

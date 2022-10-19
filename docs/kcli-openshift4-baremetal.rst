@@ -26,11 +26,11 @@ Instructions::
 Configure Repo
 --------------
 To use locally follow the link below 
-* `OpenShift Virtualization GitOps Repository <https://openshift-virtualization-gitops-repository.readthedocs.io/en/latest/#openshift-virtualization-gitops-repository>`_
+* `KVM GitOps Repository <https://kvm-gitops-repository.readthedocs.io/en/latest/#kvm-gitops-repository>`_
 
 To use external Git repo use the following steps::
     
-    curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/install.sh
+    curl -OL https://raw.githubusercontent.com/tosin2013/kvm-gitops/main/scripts/install.sh
     chmod +x install.sh
     export CONFIGURE_GITEA=false
     ./install.sh
@@ -46,7 +46,7 @@ Configure GitOps::
     systemctl enable podman.socket --now
     mkdir -p /opt/fetchit
     mkdir -p ~/.fetchit
-    GITURL="http://yourrepo:3000/tosin/openshift-virtualization-gitops.git"
+    GITURL="http://yourrepo:3000/tosin/kvm-gitops.git"
     # Change Git URL to your Git Repo
     cat  >/root/.fetchit/config.yaml<<EOF
     targetConfigs:
@@ -61,7 +61,7 @@ Configure GitOps::
       branch: main
     EOF
 
-    cp /home/admin/openshift-virtualization-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+    cp /home/admin/kvm-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
     systemctl enable fetchit --now
 
     podman ps 

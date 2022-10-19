@@ -16,7 +16,7 @@ def main():
     hostname = os.uname()
     home = str(Path.home())
 
-    put_markdown(("""# OpenShift Virtualization GitOps Repository
+    put_markdown(("""# Kvm GitOps Repository
     
     You can deploy OpenShift Via the Assisted Installer using the methods below 
     

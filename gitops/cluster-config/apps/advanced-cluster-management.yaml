@@ -13,7 +13,7 @@ spec:
   project: default
   source:
     path: gitops/cluster-config/rhacm-operator/base
-    repoURL: https://github.com/tosin2013/openshift-virtualization-gitops.git
+    repoURL: https://github.com/tosin2013/kvm-gitops.git
     targetRevision: main
   syncPolicy:
     automated:
