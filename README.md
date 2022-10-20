@@ -69,7 +69,7 @@ git push -u origin main
 ```
 
 ### RHEL Edge Deployments
-Copy inventory to custom name example: r640
+Copy inventory to custom name example: equinox
 ```
 cp avi inventories/equinox inventories/equinox-${HOSTNAME}
 git add .
