@@ -1,0 +1,263 @@
+- name: Deploy Gitea
+  hosts: localhost
+  become: true
+  vars:
+    gitea_user: svc-gitea
+    gitea_admin: admin 
+    gitea_password: vNuZDHPNhUms91YU
+    endpoint: 127.0.0.1
+  
+  tasks:
+    - name: Creating a file with content
+      copy:
+        dest: "/tmp/file.json"
+        content: |
+          {"name":"test"}
+      tags: always 
+
+    - name: Get API Key
+      uri:
+        headers:
+          Content-Type: application/json
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/users/svc-gitea/tokens"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/file.json
+      register: gitea_api_key
+      tags: always 
+
+    - name: Debug API Key
+      ansible.builtin.debug:
+          msg: "{{  gitea_api_key }}"
+      tags: always 
+
+    - name: Debug API Key
+      ansible.builtin.debug:
+          msg: "{{  (gitea_api_key.content | from_json)['sha1']}}"
+      tags: always 
+
+    - name: Set the API Key fact
+      ansible.builtin.set_fact:
+        api_key: "{{  (gitea_api_key.content | from_json)['sha1']}}"
+      tags: always 
+
+    - name: Get API Key
+      ansible.builtin.debug:
+        var: api_key
+      tags: always 
+
+    - name: Creating empty repo
+      copy:
+        dest: "/tmp/file-repo.json"
+        content: |
+          {"name": "kvm-gitops"}
+      tags: always 
+
+    - name: Empty Repository
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/user/repos"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/file-repo.json
+      register: gitea_api_key
+      tags: always 
+
+    - name: Migrate Repository
+      copy:
+        dest: "/tmp/file-repo-migration.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/Red-Hat-SE-RTO/gitops-catalog",
+            "repo_name": "gitops-catalog",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/gitops-catalog.git",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+      tags: openshift_deployments 
+
+    - name: Migrate Red Hat GitOps Repository
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/file-repo-migration.json
+      register: gitea_api_key
+      tags: openshift_deployments 
+
+    - name: Migrate Repository OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      copy:
+        dest: "/tmp/rhacm-configuration.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/Red-Hat-SE-RTO/rhacm-configuration",
+            "repo_name": "rhacm-configuration",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/rhacm-configuration.git",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+      tags: openshift_deployments 
+
+    - name: Migrate OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/rhacm-configuration.json
+      register: gitea_api_key
+      tags: openshift_deployments 
+
+    - name: Migrate Repository OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      copy:
+        dest: "/tmp/applications.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/Red-Hat-SE-RTO/applications",
+            "repo_name": "applications",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/applications.git",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+      tags: openshift_deployments 
+
+    - name: Migrate OpenShift Post Installation with Red Hat Advanced Cluster Management for Kubernetes
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/applications.json
+      register: gitea_api_key
+      tags: openshift_deployments 
+
+    - name: Migrate Repository RHEL Fleet Manager ansible automation role
+      copy:
+        dest: "/tmp/rhel-fleet-management.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/Red-Hat-SE-RTO/rhel-fleet-management",
+            "repo_name": "rhel-fleet-management",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/rhel-fleet-management",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+      tags: rhel_edge_deployments 
+
+    - name: Use Ansible to manage RHEL instances using Fleet Manager or Image Builder.
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/rhel-fleet-management.json
+      register: gitea_api_key
+      tags: rhel_edge_deployments 
+
+    - name: Migrate Repository RHEL EDGE Management
+      copy:
+        dest: "/tmp/rhel-edge-management.json"
+        content: |
+          {
+            "clone_addr": "https://github.com/tosin2013/rhel-edge-management-role",
+            "repo_name": "rhel-edge-management-role",
+            "auth_password": "",
+            "auth_username": "",
+            "html_url": "http://{{ endpoint}}:3000",
+            "clone_url": "http://{{ endpoint}}:3000/svc-gitea/rhel-edge-management-role",
+            "mirror": False,
+            "private": False,
+            "repo_owner": "svc-gitea",
+            "service": "git",
+            "uid": 0,
+            "wiki": True
+          }
+      tags: rhel_edge_deployments 
+
+    - name: RHEL EDGE Management repsoitory 
+      uri:
+        headers:
+          Content-Type: application/json
+          Authorization: "Bearer {{ api_key }}"
+        user: "{{ gitea_user }}"
+        password: "{{ gitea_password }}"
+        method: POST
+        force_basic_auth: true
+        url: "http://{{ endpoint}}:3000/api/v1/repos/migrate"
+        return_content: yes
+        body_format: json
+        status_code: 201
+        src: /tmp/rhel-edge-management.json
+      register: gitea_api_key
+      tags: rhel_edge_deployments 
+      
+

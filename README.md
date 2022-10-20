@@ -28,8 +28,10 @@ ansible-playbook -i  inventories/production/hosts configure-host.yml --extra-var
 
 # Optional: Install Gitea on Host
 ```
+curl -OL https://raw.githubusercontent.com/tosin2013/kvm-gitops/main/scripts/configure_gitea.sh
+chmod +x configure_gitea.sh
 export CONFIGURE_GITEA=true
-./scripts/configure_gitea.sh
+./configure_gitea.sh
 ```
 
 ## Optional: Configure Git Repo
@@ -39,13 +41,27 @@ Access the Git Repo
 $ cat ~/gitea-password.txt
 ```
 
+## For OpenShift Deployments
+```
+sudo ansible-playbook -i  inventories/production/hosts migrate-repos.yaml --extra-vars "gitea_admin=svc-gitea gitea_password=$(cat ~/gitea-password.txt | grep PASSWORD | awk '{print $2}') endpoint=$(hostname -I | awk '{print $1}')" -t openshift_deployments
+```
+    
+## For  RHEL Edge Deployments
+```
+sudo ansible-playbook -i  inventories/production/hosts migrate-repos.yaml --extra-vars "gitea_admin=svc-gitea gitea_password=$(cat ~/gitea-password.txt | grep PASSWORD | awk '{print $2}') endpoint=$(hostname -I | awk '{print $1}')" -t rhel_edge_deployments
+```
+
+    
 Commit local openshit virtualization repo to the Git Repo
 ```
+$ cd $HOME/kvm-gitops
 $ git remote remove origin
 $ git remote add origin http://yourip:3000/svc-gitea/kvm-gitops.git
 $ git push --set-upstream origin main
 ```
-## Optional: Copy inventory to custom name example: r640
+## Optional copy inventorie files for deployments: 
+### OpenShift Deployments
+Copy inventory to custom name example: r640
 ```
 cp avi inventories/dev inventories/r640
 ```

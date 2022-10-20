@@ -22,6 +22,10 @@ if [ $(get_distro) == "rhel" ]; then
     sudo subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
 elif [ $(get_distro) == "centos" ]; then
     sudo yum install epel-release -y 
+elif [ $(get_distro) == "rocky" ]; then
+    sudo dnf install firewalld -y   
+    sudo systemctl enable firewalld
+    sudo systemctl start firewalld
 fi 
 
 sudo dnf install git vim unzip wget bind-utils tar podman ansible-core jq python3-pip genisoimage nmstate dialog -y 
@@ -33,7 +37,7 @@ sudo rm configure-openshift-packages.sh
 
 sudo pip3 install jmespath
 sudo pip3 install j2cli
-sudo pip3 install -U pywebio
+#sudo pip3 install -U pywebio
 
 sudo systemctl enable podman.socket
 sudo systemctl start podman.socket

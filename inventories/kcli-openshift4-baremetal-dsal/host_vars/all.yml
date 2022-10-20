@@ -15,7 +15,7 @@ rhel_version: ""
 ####
 # Enable Gitops 
 enable_gitops: false 
-default_gitops_repo: https://github.com/tosin2013/openshift-virtualization-gitops.git
+default_gitops_repo: https://github.com/tosin2013/kvm-gitops.git
 directory_name: "kcli-openshift4-baremetal-dsal"
 
 # PTR - The PTR record that should be use
