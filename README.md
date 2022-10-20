@@ -64,7 +64,7 @@ $ git push --set-upstream origin main
 Copy inventory to custom name example: r640
 ```
 mkdir inventories/r640
-cp -avi inventories/dev inventories/r640
+cp -avi inventories/dev/* inventories/r640
 git add .
 git commit -m "Added r640 inventory"
 git push -u origin main
@@ -74,13 +74,18 @@ git push -u origin main
 Copy inventory to custom name example: equinox
 ```
 mkdir -p inventories/equinox-${HOSTNAME}
-cp -avi inventories/equinox inventories/equinox-${HOSTNAME}
+cp -avi inventories/equinox/* inventories/equinox-${HOSTNAME}
 git add .
 git commit -m "Added Equinox Inventory"
 git push -u origin main
 ```
 
 **Make changes to repo and push to git repo**
+``
+cat inventories/equinox-hypervisor/host_vars/all.yml
+  default_gitops_repo:http://yourip:3000/svc-gitea/kvm-gitops.git
+  directory_name: "equinox-${HOSTNAME}"
+```
 
 ## Configure Fetchit
 > To test the Fetchit, run the following command as root:

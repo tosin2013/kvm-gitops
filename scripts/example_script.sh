@@ -27,6 +27,8 @@ targetConfigs:
     schedule: "*/1 * * * *"
   branch: main
 EOF
+  chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/qubinode-installer/
+  cp -avi /home/${TARGET_USER}/qubinode-installer/playbooks/vars/* /home/${TARGET_USER}/qubinode-installer/samples/
 }
 
 function kcli-openshift4-baremetal(){
@@ -70,6 +72,8 @@ targetConfigs:
     schedule: "*/1 * * * *"
   branch: main
 EOF
+  chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/qubinode-installer/
+  cp -avi /home/${TARGET_USER}/qubinode-installer/playbooks/vars/* /home/${TARGET_USER}/qubinode-installer/samples/
 }
 
 
@@ -88,6 +92,8 @@ targetConfigs:
     schedule: "*/1 * * * *"
   branch: main
 EOF
+  chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/qubinode-installer/
+  cp -avi /home/${TARGET_USER}/qubinode-installer/playbooks/vars/* /home/${TARGET_USER}/qubinode-installer/samples/
 }
 
 function openshift-4-deployment-notes(){
@@ -105,6 +111,7 @@ targetConfigs:
     schedule: "*/1 * * * *"
   branch: main
 EOF
+  chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/openshift-4-deployment-notes/
 }
 
 function openshift-4-deployment-notes-lab(){
@@ -131,6 +138,9 @@ targetConfigs:
     schedule: "*/1 * * * *"
   branch: main
 EOF
+  chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/qubinode-installer/
+  cp -avi /home/${TARGET_USER}/qubinode-installer/playbooks/vars/* /home/${TARGET_USER}/qubinode-installer/samples/
+  chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/openshift-4-deployment-notes/
 }
 
 function openshift-aio(){

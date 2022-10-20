@@ -28,7 +28,7 @@ elif [ $(get_distro) == "rocky" ]; then
     sudo systemctl start firewalld
 fi 
 
-sudo dnf install git vim unzip wget bind-utils tar podman ansible-core jq python3-pip genisoimage nmstate dialog -y 
+sudo dnf install git vim unzip wget bind-utils tar podman ansible-core jq python3-pip genisoimage nmstate dialog net-tools ipcalc -y
 
 sudo curl -OL https://raw.githubusercontent.com/tosin2013/openshift-4-deployment-notes/master/pre-steps/configure-openshift-packages.sh
 sudo chmod +x configure-openshift-packages.sh

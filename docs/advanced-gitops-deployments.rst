@@ -29,7 +29,7 @@ Adter Anisble Playbook ```configure-host.yml``` run::
 
 RHEL Edge Deployment
 ~~~~~~~~~~~~~~~~~~~~
-    ./example.sh  rhel-edge equinox-${HOSTNAME} http://gitea.example.com:3000/svc-gitea/kvm-gitops.git   svc-gitea yourpassword
+    ./example_script.sh rhel-edge equinox-${HOSTNAME} http://gitea.example.com:3000/svc-gitea/kvm-gitops.git   svc-gitea yourpassword
 
 
 
