@@ -52,7 +52,7 @@ sudo ansible-playbook -i  inventories/production/hosts migrate-repos.yaml --extr
 ```
 
     
-Commit local openshit virtualization repo to the Git Repo
+Commit local kvm repo to the Git Repo
 ```
 $ cd $HOME/kvm-gitops
 $ git remote remove origin
