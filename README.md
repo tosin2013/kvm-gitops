@@ -59,12 +59,23 @@ $ git remote remove origin
 $ git remote add origin http://yourip:3000/svc-gitea/kvm-gitops.git
 $ git push --set-upstream origin main
 ```
-## Optional copy inventorie files for deployments: 
+## Optional copy inventory files for deployments: 
 ### OpenShift Deployments
 Copy inventory to custom name example: r640
 ```
 cp avi inventories/dev inventories/r640
+git add .
+git push -u origin main
 ```
+
+### RHEL Edge Deployments
+Copy inventory to custom name example: r640
+```
+cp avi inventories/equinox inventories/equinox-${HOSTNAME}
+git add .
+git push -u origin main
+```
+
 **Make changes to repo and push to git repo**
 
 ## Configure Fetchit
