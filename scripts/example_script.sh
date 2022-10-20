@@ -2,8 +2,18 @@
 # example example_script.sh isntall-type kcli-openshift4-baremetal-dsal "http://yourrepo:3000/tosin/kvm-gitops.git svc-gitea CHANGEME"
 set -xe 
 
+
+if id "lab-user" &>/dev/null; then
+    export TARGET_USER=lab-user
+elif id "admin" &>/dev/null; then
+    export TARGET_USER=admin
+else
+  read -p "Target UserName not found please Enter> " TARGET_USER
+  export TARGET_USER=${TARGET_USER}
+fi
+
 function qubinode-installer(){
-  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t qubinode-installer
+  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml  --extra-vars "user_name=${TARGET_USER}"  -t qubinode-installer
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -13,14 +23,14 @@ targetConfigs:
   filetransfer:
   - name: copy-vars
     targetPath: inventories/${DIRECTORY_PATH}/host_vars
-    destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
+    destinationDirectory: /home/${TARGET_USER}/qubinode-installer/playbooks/vars
     schedule: "*/1 * * * *"
   branch: main
 EOF
 }
 
 function kcli-openshift4-baremetal(){
-  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t kcli-openshift4-baremetal
+  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml --extra-vars "user_name=${TARGET_USER}" -t kcli-openshift4-baremetal
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -37,7 +47,7 @@ EOF
 }
 
 function kcli-openshift4-baremetal-lab(){
-  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t qubinode-installer -t kcli-openshift4-baremetal
+  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t qubinode-installer --extra-vars "user_name=${TARGET_USER}" -t kcli-openshift4-baremetal
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -56,14 +66,32 @@ targetConfigs:
   filetransfer:
   - name: qubinode-installer
     targetPath: inventories/${DIRECTORY_PATH}/host_vars
-    destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
+    destinationDirectory: /home/${TARGET_USER}/qubinode-installer/playbooks/vars
+    schedule: "*/1 * * * *"
+  branch: main
+EOF
+}
+
+
+function rhel-edge(){
+  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml --extra-vars "user_name=${TARGET_USER}" -t qubinode-installer
+# Change Git URL to your Git Repo
+cat  >/root/.fetchit/config.yaml<<EOF
+targetConfigs:
+- url: ${GITURL}
+  username: ${GIT_USERNAME}
+  password: ${GIT_PASSWORD}
+  filetransfer:
+  - name: copy-vars
+    targetPath: inventories/${DIRECTORY_PATH}/host_vars
+    destinationDirectory: /home/${TARGET_USER}/qubinode-installer/playbooks/vars
     schedule: "*/1 * * * *"
   branch: main
 EOF
 }
 
 function openshift-4-deployment-notes(){
-  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t openshift-4-deployment-notes
+  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml --extra-vars "user_name=${TARGET_USER}" -t openshift-4-deployment-notes
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -73,14 +101,14 @@ targetConfigs:
   filetransfer:
   - name: copy-vars
     targetPath: inventories/${DIRECTORY_PATH}/manual-assisted-installer
-    destinationDirectory: /home/admin/openshift-4-deployment-notes/assisted-installer
+    destinationDirectory: /home/${TARGET_USER}/openshift-4-deployment-notes/assisted-installer
     schedule: "*/1 * * * *"
   branch: main
 EOF
 }
 
 function openshift-4-deployment-notes-lab(){
-  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t qubinode-installer -t openshift-4-deployment-notes
+  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t qubinode-installer --extra-vars "user_name=${TARGET_USER}" -t openshift-4-deployment-notes
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -90,7 +118,7 @@ targetConfigs:
   filetransfer:
   - name: copy-vars
     targetPath: inventories/${DIRECTORY_PATH}/manual-assisted-installer
-    destinationDirectory: /home/admin/openshift-4-deployment-notes/assisted-installer
+    destinationDirectory: /home/${TARGET_USER}/openshift-4-deployment-notes/assisted-installer
     schedule: "*/1 * * * *"
   branch: main
 - url: ${GITURL}
@@ -99,14 +127,14 @@ targetConfigs:
   filetransfer:
   - name: qubinode-installer
     targetPath: inventories/${DIRECTORY_PATH}/host_vars
-    destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
+    destinationDirectory: /home/${TARGET_USER}/qubinode-installer/playbooks/vars
     schedule: "*/1 * * * *"
   branch: main
 EOF
 }
 
 function openshift-aio(){
-  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml -t openshift-aio
+  ansible-playbook  -i  kvm-gitops/inventories/production/host kvm-gitops/configure-repos.yml --extra-vars "user_name=${TARGET_USER}"  -t openshift-aio
 # Change Git URL to your Git Repo
 cat  >/root/.fetchit/config.yaml<<EOF
 targetConfigs:
@@ -123,7 +151,7 @@ EOF
 }
 
 if [ $# -ne 5 ]; then
-    echo "Usage: $0 <qubinode-installer|kcli-openshift4-baremetal|kcli-openshift4-baremetal-lab|openshift-4-deployment-notes|openshift-4-deployment-notes-lab|openshift-aio> <directory_path> <git_url> <git_username> <git_password>"
+    echo "Usage: $0 <qubinode-installer|kcli-openshift4-baremetal|kcli-openshift4-baremetal-lab|openshift-4-deployment-notes|openshift-4-deployment-notes-lab|openshift-aio|rhel-edge> <directory_path> <git_url> <git_username> <git_password>"
     exit 1
 fi
 
@@ -172,6 +200,10 @@ case $INSTALL_TYPE in
 
   openshift-aio)
     openshift-aio
+    ;;
+
+  rhel-edge)
+    rhel-edge
     ;;
 
   *)

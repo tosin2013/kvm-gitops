@@ -17,13 +17,26 @@ Options
 Example Run::
     
     sudo su - root 
-    curl -OL https://raw.githubusercontent.com/tosin2013/openshift-virtualization-gitops/main/scripts/example_script.sh
+    curl -OL https://raw.githubusercontent.com/tosin2013/kvm-gitops/main/scripts/example_script.sh
     chmod +x example_script.sh
-    ./example_script.sh yqubinode-installer example http://gitea.example.com:3000/tosin/openshift-virtualization-gitops.git gituser password
+    ./example_script.sh qubinode-installer example http://gitea.example.com:3000/svc-gitea/kvm-gitops.git gituser yourpassword
 
 Adter Anisble Playbook ```configure-host.yml``` run::
 
     sudo su - root
-    bash example_script.sh qubinode-installer example http://gitea.example.com:3000/tosin/openshift-virtualization-gitops.git gituser password
+    bash example_script.sh qubinode-installer example http://gitea.example.com:3000/svc-gitea/kvm-gitops.git gituser yourpassword
 
 
+RHEL Edge Deployment
+~~~~~~~~~~~~~~~~~~~~
+    ./example.sh  rhel-edge equinox-${HOSTNAME} http://gitea.example.com:3000/svc-gitea/kvm-gitops.git   svc-gitea yourpassword
+
+
+
+Trouble Shooting
+~~~~~~~~~~~~~~~~
+To remove fetchit from your machine::
+
+    sudo su - root
+    cd /root/kvm-gitops
+    ./scripts/fetchit/remove-fetchit.sh

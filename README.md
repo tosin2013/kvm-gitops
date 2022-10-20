@@ -65,6 +65,7 @@ Copy inventory to custom name example: r640
 ```
 cp avi inventories/dev inventories/r640
 git add .
+git commit -m "Added r640 inventory"
 git push -u origin main
 ```
 
@@ -73,6 +74,7 @@ Copy inventory to custom name example: equinox
 ```
 cp avi inventories/equinox inventories/equinox-${HOSTNAME}
 git add .
+git commit -m "Added Equinox Inventory"
 git push -u origin main
 ```
 
@@ -82,9 +84,44 @@ git push -u origin main
 > To test the Fetchit, run the following command as root:
 ```
 sudo su - root
-./scripts/configure-fetchit.sh
+curl -OL https://raw.githubusercontent.com/tosin2013/kvm-gitops/main/scripts/configure_fetchit.sh
+chmod +x configure_fetchit.sh
+./configure-fetchit.sh
 ```
 **Optional: Advanced Deployment**
+
+> See [Qubinode GitOps Deployment](https://qubinode-installer.readthedocs.io/en/latest/gitops_deployment.html) for more details.
+```
+sudo su - admin 
+git clone https://github.com/tosin2013/qubinode-installer.git
+sudo su - root
+systemctl enable podman.socket --now
+mkdir -p /opt/fetchit
+mkdir -p ~/.fetchit
+
+# Change Git URL to your Git Repo
+GITURL="http://yourrepo:3000/tosin/kvm-gitops.git"
+cat  >/root/.fetchit/config.yaml<<EOF
+targetConfigs:
+- url:  ${GITURL}
+  username: svc-gitea
+  password: password
+  filetransfer:
+  - name: copy-vars
+    targetPath: inventories/virtual-lab/host_vars
+    destinationDirectory: /home/admin/qubinode-installer/playbooks/vars
+    schedule: "*/1 * * * *"
+  branch: main
+EOF
+
+cp /home/admin/kvm-gitops/scripts/fetchit/fetchit-root.service /etc/systemd/system/fetchit.service
+systemctl enable fetchit --now
+
+podman ps 
+
+exit
+```
+
 > See [Qubinode GitOps Deployment](https://qubinode-installer.readthedocs.io/en/latest/gitops_deployment.html) for more details.
 ```
 sudo su - admin 
@@ -119,7 +156,9 @@ exit
 
 # Troubleshooting
 * If you are having issues logging on to gitea from the user stop and start the podman container.
-
+```
+./scripts/remove.sh
+```
 
 Links
 ------

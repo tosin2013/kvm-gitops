@@ -1,22 +1,24 @@
 - name: Install Sync Repository
   hosts: localhost
   become: true
+  vars:
+    user_name: admin
 
   tasks:
   - name: Qubinode Installer Script for KVM configration
     ansible.builtin.git:
       repo: https://github.com/tosin2013/qubinode-installer.git
-      dest: /home/admin/qubinode-installer
+      dest: "/home/{{ user_name }}/qubinode-installer"
       version: master
     tags: qubinode-installer
 
   - name: Recursively change ownership of qubinode-installer directory 
     ansible.builtin.file:
-      path: /home/admin/qubinode-installer
+      path: "/home/{{ user_name }}/qubinode-installer"
       state: directory
       recurse: yes
-      owner: admin
-      group: admin
+      owner: "{{ user_name }}"
+      group: "{{ user_name }}"
 
   - name: kcli-openshift4-baremetal repository for bare metal IPI
     ansible.builtin.git:
@@ -28,17 +30,17 @@
   - name: openshift-4-deployment-notes repository for manual assisted-installer
     ansible.builtin.git:
       repo: https://github.com/tosin2013/openshift-4-deployment-notes.git
-      dest:  /home/admin/openshift-4-deployment-notes
+      dest:  "/home/{{ user_name }}/openshift-4-deployment-notes"
       version: master
     tags: openshift-4-deployment-notes
 
   - name: Recursively change ownership of openshift-4-deployment-notes directory 
     ansible.builtin.file:
-      path: /home/admin/openshift-4-deployment-notes
+      path: /home/{{ user_name }}/openshift-4-deployment-notes
       state: directory
       recurse: yes
-      owner: admin
-      group: admin
+      owner: "{{ user_name }}"
+      group: "{{ user_name }}"
 
   - name: OpenShift All-in-One deployment automation repository
     ansible.builtin.git:
