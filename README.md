@@ -63,7 +63,8 @@ $ git push --set-upstream origin main
 ### OpenShift Deployments
 Copy inventory to custom name example: r640
 ```
-cp avi inventories/dev inventories/r640
+mkdir inventories/r640
+cp -avi inventories/dev inventories/r640
 git add .
 git commit -m "Added r640 inventory"
 git push -u origin main
@@ -72,7 +73,8 @@ git push -u origin main
 ### RHEL Edge Deployments
 Copy inventory to custom name example: equinox
 ```
-cp avi inventories/equinox inventories/equinox-${HOSTNAME}
+mkdir -p inventories/equinox-${HOSTNAME}
+cp -avi inventories/equinox inventories/equinox-${HOSTNAME}
 git add .
 git commit -m "Added Equinox Inventory"
 git push -u origin main
