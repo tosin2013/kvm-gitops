@@ -18,6 +18,10 @@ enable_gitops: true
 default_gitops_repo: https://github.com/tosin2013/kvm-gitops.git
 directory_name: "equinox"
 
+#####
+# RHPDS Settings
+run_on_rhpds: yes 
+
 # PTR - The PTR record that should be use
 qubinode_ptr: changeme.in-addr.arpa
 
