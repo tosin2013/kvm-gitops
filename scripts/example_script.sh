@@ -28,7 +28,7 @@ targetConfigs:
   branch: main
 EOF
   chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/qubinode-installer/
-  cp -avi /home/${TARGET_USER}/qubinode-installer/playbooks/vars/* /home/${TARGET_USER}/qubinode-installer/samples/
+  cp -avi  /home/${TARGET_USER}/kvm-gitops/inventories/${DIRECTORY_PATH}/host_vars/* /home/${TARGET_USER}/qubinode-installer/samples/
 }
 
 function kcli-openshift4-baremetal(){
@@ -73,7 +73,7 @@ targetConfigs:
   branch: main
 EOF
   chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/qubinode-installer/
-  cp -avi /home/${TARGET_USER}/qubinode-installer/playbooks/vars/* /home/${TARGET_USER}/qubinode-installer/samples/
+  cp -avi  /home/${TARGET_USER}/kvm-gitops/inventories/${DIRECTORY_PATH}/host_vars/* /home/${TARGET_USER}/qubinode-installer/samples/
 }
 
 
@@ -139,7 +139,7 @@ targetConfigs:
   branch: main
 EOF
   chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/qubinode-installer/
-  cp -avi /home/${TARGET_USER}/qubinode-installer/playbooks/vars/* /home/${TARGET_USER}/qubinode-installer/samples/
+  cp -avi  /home/${TARGET_USER}/kvm-gitops/inventories/${DIRECTORY_PATH}/host_vars/* /home/${TARGET_USER}/qubinode-installer/samples/
   chown -R ${TARGET_USER}:wheel  /home/${TARGET_USER}/openshift-4-deployment-notes/
 }
 

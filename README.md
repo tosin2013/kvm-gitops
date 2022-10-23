@@ -81,7 +81,7 @@ git push -u origin main
 ```
 
 **Make changes to repo and push to git repo**
-``
+```
 cat inventories/equinox-hypervisor/host_vars/all.yml
   default_gitops_repo:http://yourip:3000/svc-gitea/kvm-gitops.git
   directory_name: "equinox-${HOSTNAME}"
