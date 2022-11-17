@@ -20,7 +20,7 @@ primary_dns_server: "{{ idm_server_ip | default('1.1.1.1') }}"
 # We leverage a bridge network for OCP3 installs
 # and other VMS. This sets the name of the bridge to be created and use when
 # deploying VMS. If there is an existing libvirt bridge network, set the name here instea.
-qubinode_bridge_name: qubibr0
+qubinode_bridge_name: bond0
 
 # RHEL 7.9 is the current tested RHEL 7 minor release.
 # RHEL 8.6  is the current tested RHEL 8 minor release.
