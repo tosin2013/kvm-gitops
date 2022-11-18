@@ -22,7 +22,6 @@ directory_name: "equinox"
 # RHPDS Settings
 run_on_rhpds: yes 
 
-
 #####
 # Application Dependancies
 ansible_automation_platform: false
