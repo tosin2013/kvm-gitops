@@ -22,6 +22,11 @@ directory_name: "equinox"
 # RHPDS Settings
 run_on_rhpds: yes 
 
+
+#####
+# Application Dependancies
+ansible_automation_platform: false
+
 # PTR - The PTR record that should be use
 qubinode_ptr: changeme.in-addr.arpa
 
