@@ -20,6 +20,6 @@ if [ ${CONFIGURE_GITEA} == true ]; then
     sudo podman stop gitea
     sudo podman start gitea
     sudo podman generate systemd --new gitea > gitea.service 
-    cp gitea.service /etc/systemd/system
-    systemctl daemon-reload
+    sudo cp gitea.service /etc/systemd/system
+    sudo systemctl daemon-reload
 fi
