@@ -1,6 +1,6 @@
 ---
 kvm_host_gw: ""
-kvm_host_interface: ""
+kvm_host_interface: bond0
 kvm_host_ip: ""
 kvm_host_macaddr: ""
 kvm_host_mask_prefix: ""
